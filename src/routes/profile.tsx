@@ -23,7 +23,7 @@ export const Route = createFileRoute("/profile")({
 });
 
 function ProfilePage() {
-  const me = students[0];
+  const me = students[0]!;
   const mine = ideas.filter((i) => i.mine);
 
   return (

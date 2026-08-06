@@ -24,14 +24,14 @@ export const Route = createFileRoute("/chat")({
 });
 
 function ChatPage() {
-  const [activeId, setActiveId] = useState(threads[0].id);
+  const [activeId, setActiveId] = useState(threads[0]!.id);
   const [log, setLog] = useState<Record<string, Message[]>>(
     Object.fromEntries(threads.map((t) => [t.id, t.messages])),
   );
   const [draft, setDraft] = useState("");
 
   const thread = threads.find((t) => t.id === activeId)!;
-  const messages = log[activeId];
+  const messages = log[activeId] ?? [];
 
   return (
     <AppShell>
