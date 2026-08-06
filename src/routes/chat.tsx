@@ -83,7 +83,7 @@ function ChatPage() {
             setLog((prev) => ({
               ...prev,
               [activeId]: [
-                ...prev[activeId],
+                ...(prev[activeId] ?? []),
                 { id: crypto.randomUUID(), author: "You", body, me: true },
               ],
             }));
