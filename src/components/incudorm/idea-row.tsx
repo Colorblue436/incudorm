@@ -1,25 +1,44 @@
-import { ArrowUp, MessageSquare } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { ArrowUp, MessageCircle, Pin } from "lucide-react";
 import { useState } from "react";
 import type { Idea } from "@/lib/incudorm-data";
+import { DashedRule } from "./notice";
 import { StageTag } from "./stage-tag";
 
-export function IdeaRow({ idea }: { idea: Idea }) {
+export function IdeaRow({ idea, isLast }: { idea: Idea; isLast?: boolean }) {
   const [votes, setVotes] = useState(idea.upvotes);
   const [voted, setVoted] = useState(false);
 
   return (
-    <article className="border-b border-border py-5">
-      <div className="flex items-start justify-between gap-4">
-        <h3 className="font-display text-lg leading-snug text-foreground">{idea.title}</h3>
+    <article className={`relative px-4 py-4 ${isLast ? "" : "border-b border-border"}`}>
+      {idea.pinned && (
+        <Pin
+          className="absolute left-3 top-1 size-3.5 rotate-45 fill-pin-soft text-pin"
+          aria-hidden
+        />
+      )}
+      <div className="flex items-start justify-between gap-3">
+        <Link
+          to="/idea/$ideaId"
+          params={{ ideaId: idea.id }}
+          className="font-display text-[15px] font-semibold leading-snug text-foreground hover:underline hover:decoration-dashed"
+        >
+          {idea.title}
+        </Link>
         <StageTag stage={idea.stage} />
       </div>
-      <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{idea.pitch}</p>
+
+      <DashedRule className="my-2.5" />
+
+      <p className="text-sm leading-relaxed text-foreground/80">{idea.pitch}</p>
+
       {idea.needs.length > 0 && (
-        <p className="mt-2 text-sm text-muted-foreground">
-          <span className="text-foreground/70">Needs:</span> {idea.needs.join(", ")}
+        <p className="mt-2 font-mono text-xs text-muted-foreground">
+          needs: {idea.needs.join(", ")}
         </p>
       )}
-      <div className="mt-3 flex items-center gap-5 text-sm text-muted-foreground">
+
+      <div className="mt-3 flex items-center gap-4 font-mono text-xs text-muted-foreground">
         <button
           type="button"
           onClick={() => {
@@ -27,16 +46,16 @@ export function IdeaRow({ idea }: { idea: Idea }) {
             setVoted((v) => !v);
           }}
           aria-pressed={voted}
-          className="flex items-center gap-1.5 transition-colors hover:text-foreground aria-pressed:text-accent-foreground"
+          className="flex items-center gap-1 transition-colors hover:text-foreground aria-pressed:text-pin"
         >
-          <ArrowUp className="size-4" aria-hidden />
+          <ArrowUp className="size-3.5" aria-hidden />
           {votes}
         </button>
-        <span className="flex items-center gap-1.5">
-          <MessageSquare className="size-4" aria-hidden />
+        <span className="flex items-center gap-1">
+          <MessageCircle className="size-3.5" aria-hidden />
           {idea.comments}
         </span>
-        <span className="ml-auto text-xs">
+        <span className="ml-auto">
           {idea.author} · {idea.campus}
         </span>
       </div>

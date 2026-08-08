@@ -11,6 +11,7 @@ export type Idea = {
   author: string;
   campus: string;
   lookingForTeam: boolean;
+  pinned?: boolean;
   mine?: boolean;
 };
 
@@ -26,6 +27,7 @@ export const ideas: Idea[] = [
     author: "Ananya R.",
     campus: "VIT",
     lookingForTeam: true,
+    pinned: true,
     mine: true,
   },
   {
