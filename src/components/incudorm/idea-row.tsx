@@ -13,7 +13,7 @@ export function IdeaRow({ idea, isLast }: { idea: Idea; isLast?: boolean }) {
     <article className={`relative px-4 py-4 ${isLast ? "" : "border-b border-border"}`}>
       {idea.pinned && (
         <Pin
-          className="absolute -top-2 left-3 size-4 rotate-45 fill-pin-soft text-pin"
+          className="absolute left-3 top-1 size-3.5 rotate-45 fill-pin-soft text-pin"
           aria-hidden
         />
       )}
