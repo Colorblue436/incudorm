@@ -72,7 +72,7 @@ function IdeaDetailPage() {
             <DashedRule className="my-4" />
             <MonoLabel>Roles open</MonoLabel>
             <div className="mb-4 flex flex-wrap gap-2">
-              {idea.needs.map((r) => (
+              {idea.needs.map((r: string) => (
                 <RoleChip key={r}>{r}</RoleChip>
               ))}
             </div>

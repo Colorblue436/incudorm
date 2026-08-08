@@ -11,9 +11,13 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ChatRouteImport } from './routes/chat'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as PeopleRouteImport } from './routes/people'
 import { Route as PostRouteImport } from './routes/post'
 import { Route as ProfileRouteImport } from './routes/profile'
+import { Route as SignupRouteImport } from './routes/signup'
+import { Route as IdeaIdeaIdRouteImport } from './routes/idea.$ideaId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -23,6 +27,16 @@ const IndexRoute = IndexRouteImport.update({
 const ChatRoute = ChatRouteImport.update({
   id: '/chat',
   path: '/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OnboardingRoute = OnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PeopleRoute = PeopleRouteImport.update({
@@ -40,43 +54,97 @@ const ProfileRoute = ProfileRouteImport.update({
   path: '/profile',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SignupRoute = SignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IdeaIdeaIdRoute = IdeaIdeaIdRouteImport.update({
+  id: '/idea/$ideaId',
+  path: '/idea/$ideaId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/chat': typeof ChatRoute
+  '/login': typeof LoginRoute
+  '/onboarding': typeof OnboardingRoute
   '/people': typeof PeopleRoute
   '/post': typeof PostRoute
   '/profile': typeof ProfileRoute
+  '/signup': typeof SignupRoute
+  '/idea/$ideaId': typeof IdeaIdeaIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/chat': typeof ChatRoute
+  '/login': typeof LoginRoute
+  '/onboarding': typeof OnboardingRoute
   '/people': typeof PeopleRoute
   '/post': typeof PostRoute
   '/profile': typeof ProfileRoute
+  '/signup': typeof SignupRoute
+  '/idea/$ideaId': typeof IdeaIdeaIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/chat': typeof ChatRoute
+  '/login': typeof LoginRoute
+  '/onboarding': typeof OnboardingRoute
   '/people': typeof PeopleRoute
   '/post': typeof PostRoute
   '/profile': typeof ProfileRoute
+  '/signup': typeof SignupRoute
+  '/idea/$ideaId': typeof IdeaIdeaIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/chat' | '/people' | '/post' | '/profile'
+  fullPaths:
+    | '/'
+    | '/chat'
+    | '/login'
+    | '/onboarding'
+    | '/people'
+    | '/post'
+    | '/profile'
+    | '/signup'
+    | '/idea/$ideaId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/chat' | '/people' | '/post' | '/profile'
-  id: '__root__' | '/' | '/chat' | '/people' | '/post' | '/profile'
+  to:
+    | '/'
+    | '/chat'
+    | '/login'
+    | '/onboarding'
+    | '/people'
+    | '/post'
+    | '/profile'
+    | '/signup'
+    | '/idea/$ideaId'
+  id:
+    | '__root__'
+    | '/'
+    | '/chat'
+    | '/login'
+    | '/onboarding'
+    | '/people'
+    | '/post'
+    | '/profile'
+    | '/signup'
+    | '/idea/$ideaId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ChatRoute: typeof ChatRoute
+  LoginRoute: typeof LoginRoute
+  OnboardingRoute: typeof OnboardingRoute
   PeopleRoute: typeof PeopleRoute
   PostRoute: typeof PostRoute
   ProfileRoute: typeof ProfileRoute
+  SignupRoute: typeof SignupRoute
+  IdeaIdeaIdRoute: typeof IdeaIdeaIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -93,6 +161,20 @@ declare module '@tanstack/react-router' {
       path: '/chat'
       fullPath: '/chat'
       preLoaderRoute: typeof ChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/onboarding': {
+      id: '/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof OnboardingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/people': {
@@ -116,26 +198,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfileRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/idea/$ideaId': {
+      id: '/idea/$ideaId'
+      path: '/idea/$ideaId'
+      fullPath: '/idea/$ideaId'
+      preLoaderRoute: typeof IdeaIdeaIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ChatRoute: ChatRoute,
+  LoginRoute: LoginRoute,
+  OnboardingRoute: OnboardingRoute,
   PeopleRoute: PeopleRoute,
   PostRoute: PostRoute,
   ProfileRoute: ProfileRoute,
+  SignupRoute: SignupRoute,
+  IdeaIdeaIdRoute: IdeaIdeaIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
