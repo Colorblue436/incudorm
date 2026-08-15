@@ -16,6 +16,7 @@ import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as PeopleRouteImport } from './routes/people'
 import { Route as PostRouteImport } from './routes/post'
 import { Route as SignupRouteImport } from './routes/signup'
+import { Route as ContestsIndexRouteImport } from './routes/contests.index'
 import { Route as IdeaIdeaIdRouteImport } from './routes/idea.$ideaId'
 import { Route as ProfileIndexRouteImport } from './routes/profile.index'
 
@@ -54,6 +55,11 @@ const SignupRoute = SignupRouteImport.update({
   path: '/signup',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ContestsIndexRoute = ContestsIndexRouteImport.update({
+  id: '/contests/',
+  path: '/contests/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IdeaIdeaIdRoute = IdeaIdeaIdRouteImport.update({
   id: '/idea/$ideaId',
   path: '/idea/$ideaId',
@@ -74,6 +80,7 @@ export interface FileRoutesByFullPath {
   '/post': typeof PostRoute
   '/signup': typeof SignupRoute
   '/idea/$ideaId': typeof IdeaIdeaIdRoute
+  '/contests/': typeof ContestsIndexRoute
   '/profile/': typeof ProfileIndexRoute
 }
 export interface FileRoutesByTo {
@@ -85,6 +92,7 @@ export interface FileRoutesByTo {
   '/post': typeof PostRoute
   '/signup': typeof SignupRoute
   '/idea/$ideaId': typeof IdeaIdeaIdRoute
+  '/contests': typeof ContestsIndexRoute
   '/profile': typeof ProfileIndexRoute
 }
 export interface FileRoutesById {
@@ -97,6 +105,7 @@ export interface FileRoutesById {
   '/post': typeof PostRoute
   '/signup': typeof SignupRoute
   '/idea/$ideaId': typeof IdeaIdeaIdRoute
+  '/contests/': typeof ContestsIndexRoute
   '/profile/': typeof ProfileIndexRoute
 }
 export interface FileRouteTypes {
@@ -110,6 +119,7 @@ export interface FileRouteTypes {
     | '/post'
     | '/signup'
     | '/idea/$ideaId'
+    | '/contests/'
     | '/profile/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -121,6 +131,7 @@ export interface FileRouteTypes {
     | '/post'
     | '/signup'
     | '/idea/$ideaId'
+    | '/contests'
     | '/profile'
   id:
     | '__root__'
@@ -132,6 +143,7 @@ export interface FileRouteTypes {
     | '/post'
     | '/signup'
     | '/idea/$ideaId'
+    | '/contests/'
     | '/profile/'
   fileRoutesById: FileRoutesById
 }
@@ -144,6 +156,7 @@ export interface RootRouteChildren {
   PostRoute: typeof PostRoute
   SignupRoute: typeof SignupRoute
   IdeaIdeaIdRoute: typeof IdeaIdeaIdRoute
+  ContestsIndexRoute: typeof ContestsIndexRoute
   ProfileIndexRoute: typeof ProfileIndexRoute
 }
 
@@ -198,6 +211,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SignupRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/contests/': {
+      id: '/contests/'
+      path: '/contests'
+      fullPath: '/contests/'
+      preLoaderRoute: typeof ContestsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/idea/$ideaId': {
       id: '/idea/$ideaId'
       path: '/idea/$ideaId'
@@ -224,6 +244,7 @@ const rootRouteChildren: RootRouteChildren = {
   PostRoute: PostRoute,
   SignupRoute: SignupRoute,
   IdeaIdeaIdRoute: IdeaIdeaIdRoute,
+  ContestsIndexRoute: ContestsIndexRoute,
   ProfileIndexRoute: ProfileIndexRoute,
 }
 export const routeTree = rootRouteImport
