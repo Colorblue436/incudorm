@@ -9,7 +9,7 @@ export const Route = createFileRoute("/teams/$teamId")({
     if (!team) throw notFound();
     return { team };
   },
-  component: TeamWorkspaceLayout;
+  component: TeamWorkspaceLayout,
 });
 
 const tabs = [
