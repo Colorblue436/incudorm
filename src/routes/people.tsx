@@ -42,7 +42,13 @@ function PeoplePage() {
                 {s.initials}
               </span>
               <span>
-                <span className="block font-display text-[15px] font-semibold text-foreground">{s.name}</span>
+                <Link
+                  to="/profile/$userId"
+                  params={{ userId: s.id }}
+                  className="block font-display text-[15px] font-semibold text-foreground hover:underline"
+                >
+                  {s.name}
+                </Link>
                 <span className="block font-mono text-xs text-muted-foreground">{s.headline}</span>
               </span>
             </div>
@@ -69,7 +75,7 @@ function PeoplePage() {
             <p className="text-sm text-foreground">{s.lookingFor}</p>
 
             <Link
-              to="/chat"
+              to="/messages"
               className="mt-4 flex items-center justify-center gap-2 rounded-md border border-foreground py-2.5 font-display text-sm font-semibold text-foreground transition-colors hover:bg-secondary"
             >
               <MessageSquare className="size-4" aria-hidden /> Message

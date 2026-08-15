@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Home, Users, MessageCircle, FilePlus, UserCircle } from "lucide-react";
+import { Home, Users, MessageCircle, FilePlus, Trophy, UserCircle } from "lucide-react";
 import type { ReactNode } from "react";
 import { Logo } from "./notice";
 
@@ -7,7 +7,8 @@ const nav = [
   { to: "/", label: "Feed", icon: Home },
   { to: "/people", label: "People", icon: Users },
   { to: "/post", label: "Post idea", icon: FilePlus },
-  { to: "/chat", label: "Team chat", icon: MessageCircle },
+  { to: "/contests", label: "Contests", icon: Trophy },
+  { to: "/messages", label: "Messages", icon: MessageCircle },
 ] as const;
 
 export function AppShell({ children }: { children: ReactNode }) {
