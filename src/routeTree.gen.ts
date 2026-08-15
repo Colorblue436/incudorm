@@ -23,6 +23,7 @@ import { Route as TeamsTeamIdRouteImport } from './routes/teams.$teamId'
 import { Route as ContestsContestIdIndexRouteImport } from './routes/contests.$contestId.index'
 import { Route as ContestsContestIdRegisterRouteImport } from './routes/contests.$contestId.register'
 import { Route as TeamsTeamIdIndexRouteImport } from './routes/teams.$teamId.index'
+import { Route as TeamsTeamIdChatRouteImport } from './routes/teams.$teamId.chat'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -95,6 +96,11 @@ const TeamsTeamIdIndexRoute = TeamsTeamIdIndexRouteImport.update({
   path: '/',
   getParentRoute: () => TeamsTeamIdRoute,
 } as any)
+const TeamsTeamIdChatRoute = TeamsTeamIdChatRouteImport.update({
+  id: '/chat',
+  path: '/chat',
+  getParentRoute: () => TeamsTeamIdRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -109,6 +115,7 @@ export interface FileRoutesByFullPath {
   '/contests/': typeof ContestsIndexRoute
   '/profile/': typeof ProfileIndexRoute
   '/contests/$contestId/register': typeof ContestsContestIdRegisterRoute
+  '/teams/$teamId/chat': typeof TeamsTeamIdChatRoute
   '/contests/$contestId/': typeof ContestsContestIdIndexRoute
   '/teams/$teamId/': typeof TeamsTeamIdIndexRoute
 }
@@ -124,6 +131,7 @@ export interface FileRoutesByTo {
   '/contests': typeof ContestsIndexRoute
   '/profile': typeof ProfileIndexRoute
   '/contests/$contestId/register': typeof ContestsContestIdRegisterRoute
+  '/teams/$teamId/chat': typeof TeamsTeamIdChatRoute
   '/contests/$contestId': typeof ContestsContestIdIndexRoute
   '/teams/$teamId': typeof TeamsTeamIdIndexRoute
 }
@@ -141,6 +149,7 @@ export interface FileRoutesById {
   '/contests/': typeof ContestsIndexRoute
   '/profile/': typeof ProfileIndexRoute
   '/contests/$contestId/register': typeof ContestsContestIdRegisterRoute
+  '/teams/$teamId/chat': typeof TeamsTeamIdChatRoute
   '/contests/$contestId/': typeof ContestsContestIdIndexRoute
   '/teams/$teamId/': typeof TeamsTeamIdIndexRoute
 }
@@ -159,6 +168,7 @@ export interface FileRouteTypes {
     | '/contests/'
     | '/profile/'
     | '/contests/$contestId/register'
+    | '/teams/$teamId/chat'
     | '/contests/$contestId/'
     | '/teams/$teamId/'
   fileRoutesByTo: FileRoutesByTo
@@ -174,6 +184,7 @@ export interface FileRouteTypes {
     | '/contests'
     | '/profile'
     | '/contests/$contestId/register'
+    | '/teams/$teamId/chat'
     | '/contests/$contestId'
     | '/teams/$teamId'
   id:
@@ -190,6 +201,7 @@ export interface FileRouteTypes {
     | '/contests/'
     | '/profile/'
     | '/contests/$contestId/register'
+    | '/teams/$teamId/chat'
     | '/contests/$contestId/'
     | '/teams/$teamId/'
   fileRoutesById: FileRoutesById
@@ -310,14 +322,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TeamsTeamIdIndexRouteImport
       parentRoute: typeof TeamsTeamIdRoute
     }
+    '/teams/$teamId/chat': {
+      id: '/teams/$teamId/chat'
+      path: '/chat'
+      fullPath: '/teams/$teamId/chat'
+      preLoaderRoute: typeof TeamsTeamIdChatRouteImport
+      parentRoute: typeof TeamsTeamIdRoute
+    }
   }
 }
 
 interface TeamsTeamIdRouteChildren {
+  TeamsTeamIdChatRoute: typeof TeamsTeamIdChatRoute
   TeamsTeamIdIndexRoute: typeof TeamsTeamIdIndexRoute
 }
 
 const TeamsTeamIdRouteChildren: TeamsTeamIdRouteChildren = {
+  TeamsTeamIdChatRoute: TeamsTeamIdChatRoute,
   TeamsTeamIdIndexRoute: TeamsTeamIdIndexRoute,
 }
 
