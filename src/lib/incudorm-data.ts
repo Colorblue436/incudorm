@@ -170,3 +170,119 @@ export const roleOptions = [
   "Growth",
   "Hardware lead",
 ];
+
+export type Contest = {
+  id: string;
+  name: string;
+  host: string;
+  deadline: string;
+  prize: string;
+  tracks: string[];
+  blurb: string;
+  status: "Open" | "Judging" | "Closed";
+  registered: number;
+};
+
+export const contests: Contest[] = [
+  {
+    id: "campus-sprint",
+    name: "Campus Build Sprint",
+    host: "VIT E-Cell",
+    deadline: "Sep 12",
+    prize: "₹50,000 + incubation",
+    tracks: ["Consumer", "Campus ops", "Sustainability"],
+    blurb: "48 hours, one working prototype. Teams of 2-4, at least one non-technical member.",
+    status: "Open",
+    registered: 34,
+  },
+  {
+    id: "hardware-jam",
+    name: "Hardware Jam",
+    host: "IIT-M Tinkerers Lab",
+    deadline: "Oct 03",
+    prize: "Lab access for a semester",
+    tracks: ["Robotics", "Sensors"],
+    blurb: "Bring a breadboard idea, leave with a demo. Components sponsored for shortlisted teams.",
+    status: "Open",
+    registered: 12,
+  },
+  {
+    id: "spring-pitch",
+    name: "Spring Pitch Day",
+    host: "SRM Incubator",
+    deadline: "Closed Jul 20",
+    prize: "₹1,00,000 seed",
+    tracks: ["Any"],
+    blurb: "Five minutes on stage in front of alumni investors.",
+    status: "Judging",
+    registered: 58,
+  },
+];
+
+export type TeamFile = { id: string; name: string; size: string; by: string; when: string };
+export type Poll = { id: string; question: string; options: { label: string; votes: number }[] };
+
+export type Team = {
+  id: string;
+  name: string;
+  idea: string;
+  members: { name: string; role: string }[];
+  repo: string;
+  repoBranch: string;
+  files: TeamFile[];
+  polls: Poll[];
+  contestId?: string;
+};
+
+export const teams: Team[] = [
+  {
+    id: "food-waste-team",
+    name: "Food-waste tracker",
+    idea: "food-waste",
+    contestId: "campus-sprint",
+    members: [
+      { name: "Ananya R.", role: "Design + product" },
+      { name: "Rahul M.", role: "Backend" },
+      { name: "Meera S.", role: "Hardware" },
+    ],
+    repo: "ananya-r/foodwaste-tracker",
+    repoBranch: "main",
+    files: [
+      { id: "f1", name: "wireframes-v2.fig", size: "4.1 MB", by: "Ananya R.", when: "2 days ago" },
+      { id: "f2", name: "mess-survey.csv", size: "18 KB", by: "Meera S.", when: "5 days ago" },
+      { id: "f3", name: "pitch-outline.md", size: "3 KB", by: "Rahul M.", when: "last week" },
+    ],
+    polls: [
+      {
+        id: "p1",
+        question: "Which track do we enter for Campus Build Sprint?",
+        options: [
+          { label: "Sustainability", votes: 2 },
+          { label: "Campus ops", votes: 1 },
+        ],
+      },
+    ],
+  },
+  {
+    id: "tutoring-team",
+    name: "Peer tutoring",
+    idea: "peer-tutoring",
+    members: [
+      { name: "Rahul M.", role: "Backend" },
+      { name: "Kabir T.", role: "Growth" },
+    ],
+    repo: "rahul-m/peer-tutoring",
+    repoBranch: "dev",
+    files: [{ id: "f1", name: "credit-model.xlsx", size: "31 KB", by: "Kabir T.", when: "yesterday" }],
+    polls: [
+      {
+        id: "p1",
+        question: "Credits or cash for tutors?",
+        options: [
+          { label: "Credits", votes: 1 },
+          { label: "Cash", votes: 1 },
+        ],
+      },
+    ],
+  },
+];
