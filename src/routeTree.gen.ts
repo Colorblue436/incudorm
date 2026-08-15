@@ -26,6 +26,7 @@ import { Route as TeamsTeamIdIndexRouteImport } from './routes/teams.$teamId.ind
 import { Route as TeamsTeamIdChatRouteImport } from './routes/teams.$teamId.chat'
 import { Route as TeamsTeamIdFilesRouteImport } from './routes/teams.$teamId.files'
 import { Route as TeamsTeamIdGithubRouteImport } from './routes/teams.$teamId.github'
+import { Route as TeamsTeamIdPollsRouteImport } from './routes/teams.$teamId.polls'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -113,6 +114,11 @@ const TeamsTeamIdGithubRoute = TeamsTeamIdGithubRouteImport.update({
   path: '/github',
   getParentRoute: () => TeamsTeamIdRoute,
 } as any)
+const TeamsTeamIdPollsRoute = TeamsTeamIdPollsRouteImport.update({
+  id: '/polls',
+  path: '/polls',
+  getParentRoute: () => TeamsTeamIdRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -130,6 +136,7 @@ export interface FileRoutesByFullPath {
   '/teams/$teamId/chat': typeof TeamsTeamIdChatRoute
   '/teams/$teamId/files': typeof TeamsTeamIdFilesRoute
   '/teams/$teamId/github': typeof TeamsTeamIdGithubRoute
+  '/teams/$teamId/polls': typeof TeamsTeamIdPollsRoute
   '/contests/$contestId/': typeof ContestsContestIdIndexRoute
   '/teams/$teamId/': typeof TeamsTeamIdIndexRoute
 }
@@ -148,6 +155,7 @@ export interface FileRoutesByTo {
   '/teams/$teamId/chat': typeof TeamsTeamIdChatRoute
   '/teams/$teamId/files': typeof TeamsTeamIdFilesRoute
   '/teams/$teamId/github': typeof TeamsTeamIdGithubRoute
+  '/teams/$teamId/polls': typeof TeamsTeamIdPollsRoute
   '/contests/$contestId': typeof ContestsContestIdIndexRoute
   '/teams/$teamId': typeof TeamsTeamIdIndexRoute
 }
@@ -168,6 +176,7 @@ export interface FileRoutesById {
   '/teams/$teamId/chat': typeof TeamsTeamIdChatRoute
   '/teams/$teamId/files': typeof TeamsTeamIdFilesRoute
   '/teams/$teamId/github': typeof TeamsTeamIdGithubRoute
+  '/teams/$teamId/polls': typeof TeamsTeamIdPollsRoute
   '/contests/$contestId/': typeof ContestsContestIdIndexRoute
   '/teams/$teamId/': typeof TeamsTeamIdIndexRoute
 }
@@ -189,6 +198,7 @@ export interface FileRouteTypes {
     | '/teams/$teamId/chat'
     | '/teams/$teamId/files'
     | '/teams/$teamId/github'
+    | '/teams/$teamId/polls'
     | '/contests/$contestId/'
     | '/teams/$teamId/'
   fileRoutesByTo: FileRoutesByTo
@@ -207,6 +217,7 @@ export interface FileRouteTypes {
     | '/teams/$teamId/chat'
     | '/teams/$teamId/files'
     | '/teams/$teamId/github'
+    | '/teams/$teamId/polls'
     | '/contests/$contestId'
     | '/teams/$teamId'
   id:
@@ -226,6 +237,7 @@ export interface FileRouteTypes {
     | '/teams/$teamId/chat'
     | '/teams/$teamId/files'
     | '/teams/$teamId/github'
+    | '/teams/$teamId/polls'
     | '/contests/$contestId/'
     | '/teams/$teamId/'
   fileRoutesById: FileRoutesById
@@ -367,6 +379,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TeamsTeamIdGithubRouteImport
       parentRoute: typeof TeamsTeamIdRoute
     }
+    '/teams/$teamId/polls': {
+      id: '/teams/$teamId/polls'
+      path: '/polls'
+      fullPath: '/teams/$teamId/polls'
+      preLoaderRoute: typeof TeamsTeamIdPollsRouteImport
+      parentRoute: typeof TeamsTeamIdRoute
+    }
   }
 }
 
@@ -374,6 +393,7 @@ interface TeamsTeamIdRouteChildren {
   TeamsTeamIdChatRoute: typeof TeamsTeamIdChatRoute
   TeamsTeamIdFilesRoute: typeof TeamsTeamIdFilesRoute
   TeamsTeamIdGithubRoute: typeof TeamsTeamIdGithubRoute
+  TeamsTeamIdPollsRoute: typeof TeamsTeamIdPollsRoute
   TeamsTeamIdIndexRoute: typeof TeamsTeamIdIndexRoute
 }
 
@@ -381,6 +401,7 @@ const TeamsTeamIdRouteChildren: TeamsTeamIdRouteChildren = {
   TeamsTeamIdChatRoute: TeamsTeamIdChatRoute,
   TeamsTeamIdFilesRoute: TeamsTeamIdFilesRoute,
   TeamsTeamIdGithubRoute: TeamsTeamIdGithubRoute,
+  TeamsTeamIdPollsRoute: TeamsTeamIdPollsRoute,
   TeamsTeamIdIndexRoute: TeamsTeamIdIndexRoute,
 }
 
