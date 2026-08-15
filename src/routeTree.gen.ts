@@ -15,9 +15,9 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as PeopleRouteImport } from './routes/people'
 import { Route as PostRouteImport } from './routes/post'
-import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as IdeaIdeaIdRouteImport } from './routes/idea.$ideaId'
+import { Route as ProfileIndexRouteImport } from './routes/profile.index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -49,11 +49,6 @@ const PostRoute = PostRouteImport.update({
   path: '/post',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ProfileRoute = ProfileRouteImport.update({
-  id: '/profile',
-  path: '/profile',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
   path: '/signup',
@@ -64,6 +59,11 @@ const IdeaIdeaIdRoute = IdeaIdeaIdRouteImport.update({
   path: '/idea/$ideaId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProfileIndexRoute = ProfileIndexRouteImport.update({
+  id: '/profile/',
+  path: '/profile/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -72,9 +72,9 @@ export interface FileRoutesByFullPath {
   '/onboarding': typeof OnboardingRoute
   '/people': typeof PeopleRoute
   '/post': typeof PostRoute
-  '/profile': typeof ProfileRoute
   '/signup': typeof SignupRoute
   '/idea/$ideaId': typeof IdeaIdeaIdRoute
+  '/profile/': typeof ProfileIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -83,9 +83,9 @@ export interface FileRoutesByTo {
   '/onboarding': typeof OnboardingRoute
   '/people': typeof PeopleRoute
   '/post': typeof PostRoute
-  '/profile': typeof ProfileRoute
   '/signup': typeof SignupRoute
   '/idea/$ideaId': typeof IdeaIdeaIdRoute
+  '/profile': typeof ProfileIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -95,9 +95,9 @@ export interface FileRoutesById {
   '/onboarding': typeof OnboardingRoute
   '/people': typeof PeopleRoute
   '/post': typeof PostRoute
-  '/profile': typeof ProfileRoute
   '/signup': typeof SignupRoute
   '/idea/$ideaId': typeof IdeaIdeaIdRoute
+  '/profile/': typeof ProfileIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -108,9 +108,9 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/people'
     | '/post'
-    | '/profile'
     | '/signup'
     | '/idea/$ideaId'
+    | '/profile/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -119,9 +119,9 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/people'
     | '/post'
-    | '/profile'
     | '/signup'
     | '/idea/$ideaId'
+    | '/profile'
   id:
     | '__root__'
     | '/'
@@ -130,9 +130,9 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/people'
     | '/post'
-    | '/profile'
     | '/signup'
     | '/idea/$ideaId'
+    | '/profile/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -142,9 +142,9 @@ export interface RootRouteChildren {
   OnboardingRoute: typeof OnboardingRoute
   PeopleRoute: typeof PeopleRoute
   PostRoute: typeof PostRoute
-  ProfileRoute: typeof ProfileRoute
   SignupRoute: typeof SignupRoute
   IdeaIdeaIdRoute: typeof IdeaIdeaIdRoute
+  ProfileIndexRoute: typeof ProfileIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -191,13 +191,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PostRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/profile': {
-      id: '/profile'
-      path: '/profile'
-      fullPath: '/profile'
-      preLoaderRoute: typeof ProfileRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/signup': {
       id: '/signup'
       path: '/signup'
@@ -212,6 +205,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IdeaIdeaIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/profile/': {
+      id: '/profile/'
+      path: '/profile'
+      fullPath: '/profile/'
+      preLoaderRoute: typeof ProfileIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -222,9 +222,9 @@ const rootRouteChildren: RootRouteChildren = {
   OnboardingRoute: OnboardingRoute,
   PeopleRoute: PeopleRoute,
   PostRoute: PostRoute,
-  ProfileRoute: ProfileRoute,
   SignupRoute: SignupRoute,
   IdeaIdeaIdRoute: IdeaIdeaIdRoute,
+  ProfileIndexRoute: ProfileIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

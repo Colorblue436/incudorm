@@ -4,7 +4,7 @@ import { IdeaRow } from "@/components/incudorm/idea-row";
 import { MonoLabel } from "@/components/incudorm/notice";
 import { ideas, students } from "@/lib/incudorm-data";
 
-export const Route = createFileRoute("/profile")({
+export const Route = createFileRoute("/profile/")({
   head: () => ({
     meta: [
       { title: "Your student profile — IncuDorm" },
