@@ -18,6 +18,7 @@ import { Route as PostRouteImport } from './routes/post'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as ContestsIndexRouteImport } from './routes/contests.index'
 import { Route as IdeaIdeaIdRouteImport } from './routes/idea.$ideaId'
+import { Route as MessagesIndexRouteImport } from './routes/messages.index'
 import { Route as ProfileIndexRouteImport } from './routes/profile.index'
 import { Route as TeamsTeamIdRouteImport } from './routes/teams.$teamId'
 import { Route as ContestsContestIdIndexRouteImport } from './routes/contests.$contestId.index'
@@ -72,6 +73,11 @@ const ContestsIndexRoute = ContestsIndexRouteImport.update({
 const IdeaIdeaIdRoute = IdeaIdeaIdRouteImport.update({
   id: '/idea/$ideaId',
   path: '/idea/$ideaId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MessagesIndexRoute = MessagesIndexRouteImport.update({
+  id: '/messages/',
+  path: '/messages/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProfileIndexRoute = ProfileIndexRouteImport.update({
@@ -138,6 +144,7 @@ export interface FileRoutesByFullPath {
   '/idea/$ideaId': typeof IdeaIdeaIdRoute
   '/teams/$teamId': typeof TeamsTeamIdRouteWithChildren
   '/contests/': typeof ContestsIndexRoute
+  '/messages/': typeof MessagesIndexRoute
   '/profile/': typeof ProfileIndexRoute
   '/contests/$contestId/register': typeof ContestsContestIdRegisterRoute
   '/coordinator/contests/$contestId': typeof CoordinatorContestsContestIdRoute
@@ -158,6 +165,7 @@ export interface FileRoutesByTo {
   '/signup': typeof SignupRoute
   '/idea/$ideaId': typeof IdeaIdeaIdRoute
   '/contests': typeof ContestsIndexRoute
+  '/messages': typeof MessagesIndexRoute
   '/profile': typeof ProfileIndexRoute
   '/contests/$contestId/register': typeof ContestsContestIdRegisterRoute
   '/coordinator/contests/$contestId': typeof CoordinatorContestsContestIdRoute
@@ -180,6 +188,7 @@ export interface FileRoutesById {
   '/idea/$ideaId': typeof IdeaIdeaIdRoute
   '/teams/$teamId': typeof TeamsTeamIdRouteWithChildren
   '/contests/': typeof ContestsIndexRoute
+  '/messages/': typeof MessagesIndexRoute
   '/profile/': typeof ProfileIndexRoute
   '/contests/$contestId/register': typeof ContestsContestIdRegisterRoute
   '/coordinator/contests/$contestId': typeof CoordinatorContestsContestIdRoute
@@ -203,6 +212,7 @@ export interface FileRouteTypes {
     | '/idea/$ideaId'
     | '/teams/$teamId'
     | '/contests/'
+    | '/messages/'
     | '/profile/'
     | '/contests/$contestId/register'
     | '/coordinator/contests/$contestId'
@@ -223,6 +233,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/idea/$ideaId'
     | '/contests'
+    | '/messages'
     | '/profile'
     | '/contests/$contestId/register'
     | '/coordinator/contests/$contestId'
@@ -244,6 +255,7 @@ export interface FileRouteTypes {
     | '/idea/$ideaId'
     | '/teams/$teamId'
     | '/contests/'
+    | '/messages/'
     | '/profile/'
     | '/contests/$contestId/register'
     | '/coordinator/contests/$contestId'
@@ -266,6 +278,7 @@ export interface RootRouteChildren {
   IdeaIdeaIdRoute: typeof IdeaIdeaIdRoute
   TeamsTeamIdRoute: typeof TeamsTeamIdRouteWithChildren
   ContestsIndexRoute: typeof ContestsIndexRoute
+  MessagesIndexRoute: typeof MessagesIndexRoute
   ProfileIndexRoute: typeof ProfileIndexRoute
   ContestsContestIdRegisterRoute: typeof ContestsContestIdRegisterRoute
   CoordinatorContestsContestIdRoute: typeof CoordinatorContestsContestIdRoute
@@ -335,6 +348,13 @@ declare module '@tanstack/react-router' {
       path: '/idea/$ideaId'
       fullPath: '/idea/$ideaId'
       preLoaderRoute: typeof IdeaIdeaIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/messages/': {
+      id: '/messages/'
+      path: '/messages'
+      fullPath: '/messages/'
+      preLoaderRoute: typeof MessagesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/profile/': {
@@ -441,6 +461,7 @@ const rootRouteChildren: RootRouteChildren = {
   IdeaIdeaIdRoute: IdeaIdeaIdRoute,
   TeamsTeamIdRoute: TeamsTeamIdRouteWithChildren,
   ContestsIndexRoute: ContestsIndexRoute,
+  MessagesIndexRoute: MessagesIndexRoute,
   ProfileIndexRoute: ProfileIndexRoute,
   ContestsContestIdRegisterRoute: ContestsContestIdRegisterRoute,
   CoordinatorContestsContestIdRoute: CoordinatorContestsContestIdRoute,
