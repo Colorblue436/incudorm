@@ -19,6 +19,7 @@ import { Route as SignupRouteImport } from './routes/signup'
 import { Route as ContestsIndexRouteImport } from './routes/contests.index'
 import { Route as IdeaIdeaIdRouteImport } from './routes/idea.$ideaId'
 import { Route as ProfileIndexRouteImport } from './routes/profile.index'
+import { Route as TeamsTeamIdRouteImport } from './routes/teams.$teamId'
 import { Route as ContestsContestIdIndexRouteImport } from './routes/contests.$contestId.index'
 import { Route as ContestsContestIdRegisterRouteImport } from './routes/contests.$contestId.register'
 
@@ -72,6 +73,11 @@ const ProfileIndexRoute = ProfileIndexRouteImport.update({
   path: '/profile/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TeamsTeamIdRoute = TeamsTeamIdRouteImport.update({
+  id: '/teams/$teamId',
+  path: '/teams/$teamId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContestsContestIdIndexRoute = ContestsContestIdIndexRouteImport.update({
   id: '/contests/$contestId/',
   path: '/contests/$contestId/',
@@ -93,6 +99,7 @@ export interface FileRoutesByFullPath {
   '/post': typeof PostRoute
   '/signup': typeof SignupRoute
   '/idea/$ideaId': typeof IdeaIdeaIdRoute
+  '/teams/$teamId': typeof TeamsTeamIdRoute
   '/contests/': typeof ContestsIndexRoute
   '/profile/': typeof ProfileIndexRoute
   '/contests/$contestId/register': typeof ContestsContestIdRegisterRoute
@@ -107,6 +114,7 @@ export interface FileRoutesByTo {
   '/post': typeof PostRoute
   '/signup': typeof SignupRoute
   '/idea/$ideaId': typeof IdeaIdeaIdRoute
+  '/teams/$teamId': typeof TeamsTeamIdRoute
   '/contests': typeof ContestsIndexRoute
   '/profile': typeof ProfileIndexRoute
   '/contests/$contestId/register': typeof ContestsContestIdRegisterRoute
@@ -122,6 +130,7 @@ export interface FileRoutesById {
   '/post': typeof PostRoute
   '/signup': typeof SignupRoute
   '/idea/$ideaId': typeof IdeaIdeaIdRoute
+  '/teams/$teamId': typeof TeamsTeamIdRoute
   '/contests/': typeof ContestsIndexRoute
   '/profile/': typeof ProfileIndexRoute
   '/contests/$contestId/register': typeof ContestsContestIdRegisterRoute
@@ -138,6 +147,7 @@ export interface FileRouteTypes {
     | '/post'
     | '/signup'
     | '/idea/$ideaId'
+    | '/teams/$teamId'
     | '/contests/'
     | '/profile/'
     | '/contests/$contestId/register'
@@ -152,6 +162,7 @@ export interface FileRouteTypes {
     | '/post'
     | '/signup'
     | '/idea/$ideaId'
+    | '/teams/$teamId'
     | '/contests'
     | '/profile'
     | '/contests/$contestId/register'
@@ -166,6 +177,7 @@ export interface FileRouteTypes {
     | '/post'
     | '/signup'
     | '/idea/$ideaId'
+    | '/teams/$teamId'
     | '/contests/'
     | '/profile/'
     | '/contests/$contestId/register'
@@ -181,6 +193,7 @@ export interface RootRouteChildren {
   PostRoute: typeof PostRoute
   SignupRoute: typeof SignupRoute
   IdeaIdeaIdRoute: typeof IdeaIdeaIdRoute
+  TeamsTeamIdRoute: typeof TeamsTeamIdRoute
   ContestsIndexRoute: typeof ContestsIndexRoute
   ProfileIndexRoute: typeof ProfileIndexRoute
   ContestsContestIdRegisterRoute: typeof ContestsContestIdRegisterRoute
@@ -259,6 +272,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfileIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/teams/$teamId': {
+      id: '/teams/$teamId'
+      path: '/teams/$teamId'
+      fullPath: '/teams/$teamId'
+      preLoaderRoute: typeof TeamsTeamIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contests/$contestId/': {
       id: '/contests/$contestId/'
       path: '/contests/$contestId'
@@ -285,6 +305,7 @@ const rootRouteChildren: RootRouteChildren = {
   PostRoute: PostRoute,
   SignupRoute: SignupRoute,
   IdeaIdeaIdRoute: IdeaIdeaIdRoute,
+  TeamsTeamIdRoute: TeamsTeamIdRoute,
   ContestsIndexRoute: ContestsIndexRoute,
   ProfileIndexRoute: ProfileIndexRoute,
   ContestsContestIdRegisterRoute: ContestsContestIdRegisterRoute,
