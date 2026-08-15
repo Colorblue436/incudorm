@@ -18,6 +18,7 @@ import { Route as PostRouteImport } from './routes/post'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as ContestsIndexRouteImport } from './routes/contests.index'
 import { Route as IdeaIdeaIdRouteImport } from './routes/idea.$ideaId'
+import { Route as IdeasIdeaIdRouteImport } from './routes/ideas.$ideaId'
 import { Route as MessagesIndexRouteImport } from './routes/messages.index'
 import { Route as MessagesChatIdRouteImport } from './routes/messages.$chatId'
 import { Route as ProfileIndexRouteImport } from './routes/profile.index'
@@ -75,6 +76,11 @@ const ContestsIndexRoute = ContestsIndexRouteImport.update({
 const IdeaIdeaIdRoute = IdeaIdeaIdRouteImport.update({
   id: '/idea/$ideaId',
   path: '/idea/$ideaId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IdeasIdeaIdRoute = IdeasIdeaIdRouteImport.update({
+  id: '/ideas/$ideaId',
+  path: '/ideas/$ideaId',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MessagesIndexRoute = MessagesIndexRouteImport.update({
@@ -154,6 +160,7 @@ export interface FileRoutesByFullPath {
   '/post': typeof PostRoute
   '/signup': typeof SignupRoute
   '/idea/$ideaId': typeof IdeaIdeaIdRoute
+  '/ideas/$ideaId': typeof IdeasIdeaIdRoute
   '/messages/$chatId': typeof MessagesChatIdRoute
   '/profile/$userId': typeof ProfileUserIdRoute
   '/teams/$teamId': typeof TeamsTeamIdRouteWithChildren
@@ -178,6 +185,7 @@ export interface FileRoutesByTo {
   '/post': typeof PostRoute
   '/signup': typeof SignupRoute
   '/idea/$ideaId': typeof IdeaIdeaIdRoute
+  '/ideas/$ideaId': typeof IdeasIdeaIdRoute
   '/messages/$chatId': typeof MessagesChatIdRoute
   '/profile/$userId': typeof ProfileUserIdRoute
   '/contests': typeof ContestsIndexRoute
@@ -202,6 +210,7 @@ export interface FileRoutesById {
   '/post': typeof PostRoute
   '/signup': typeof SignupRoute
   '/idea/$ideaId': typeof IdeaIdeaIdRoute
+  '/ideas/$ideaId': typeof IdeasIdeaIdRoute
   '/messages/$chatId': typeof MessagesChatIdRoute
   '/profile/$userId': typeof ProfileUserIdRoute
   '/teams/$teamId': typeof TeamsTeamIdRouteWithChildren
@@ -228,6 +237,7 @@ export interface FileRouteTypes {
     | '/post'
     | '/signup'
     | '/idea/$ideaId'
+    | '/ideas/$ideaId'
     | '/messages/$chatId'
     | '/profile/$userId'
     | '/teams/$teamId'
@@ -252,6 +262,7 @@ export interface FileRouteTypes {
     | '/post'
     | '/signup'
     | '/idea/$ideaId'
+    | '/ideas/$ideaId'
     | '/messages/$chatId'
     | '/profile/$userId'
     | '/contests'
@@ -275,6 +286,7 @@ export interface FileRouteTypes {
     | '/post'
     | '/signup'
     | '/idea/$ideaId'
+    | '/ideas/$ideaId'
     | '/messages/$chatId'
     | '/profile/$userId'
     | '/teams/$teamId'
@@ -300,6 +312,7 @@ export interface RootRouteChildren {
   PostRoute: typeof PostRoute
   SignupRoute: typeof SignupRoute
   IdeaIdeaIdRoute: typeof IdeaIdeaIdRoute
+  IdeasIdeaIdRoute: typeof IdeasIdeaIdRoute
   MessagesChatIdRoute: typeof MessagesChatIdRoute
   ProfileUserIdRoute: typeof ProfileUserIdRoute
   TeamsTeamIdRoute: typeof TeamsTeamIdRouteWithChildren
@@ -374,6 +387,13 @@ declare module '@tanstack/react-router' {
       path: '/idea/$ideaId'
       fullPath: '/idea/$ideaId'
       preLoaderRoute: typeof IdeaIdeaIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ideas/$ideaId': {
+      id: '/ideas/$ideaId'
+      path: '/ideas/$ideaId'
+      fullPath: '/ideas/$ideaId'
+      preLoaderRoute: typeof IdeasIdeaIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/messages/': {
@@ -499,6 +519,7 @@ const rootRouteChildren: RootRouteChildren = {
   PostRoute: PostRoute,
   SignupRoute: SignupRoute,
   IdeaIdeaIdRoute: IdeaIdeaIdRoute,
+  IdeasIdeaIdRoute: IdeasIdeaIdRoute,
   MessagesChatIdRoute: MessagesChatIdRoute,
   ProfileUserIdRoute: ProfileUserIdRoute,
   TeamsTeamIdRoute: TeamsTeamIdRouteWithChildren,
